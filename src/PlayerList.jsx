@@ -12,8 +12,14 @@ function PlayerList({ players, addPlayer }) {
           </div>
         ))}
       </div>
-      <button className="add-player-btn" onClick={addPlayer}>
-        Aggiungi Giocatore
+      
+      {/* Disabilita il pulsante se ci sono già 4 giocatori */}
+      <button 
+        className="add-player-btn" 
+        onClick={addPlayer} 
+        disabled={players.length >= 6}
+      >
+        {players.length >= 6 ? "Numero massimo raggiunto" : "Aggiungi Giocatore"}
       </button>
     </div>
   );

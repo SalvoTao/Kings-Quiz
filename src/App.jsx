@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import Board from "./Board";
 import PlayerList from "./PlayerList"; 
-import "./styles/App.css"; // Nuovo percorso del CSS
+import "./styles/App.css";
 
 function App() {
   const [players, setPlayers] = useState([]);
 
+  // Funzione per aggiungere un giocatore
   const addPlayer = () => {
-    const newPlayer = {
-      id: players.length + 1,
-      name: `Giocatore ${players.length + 1}`,
-      score: 0,
-    };
-    setPlayers([...players, newPlayer]);
+    if (players.length < 6) { // Limite massimo di 4 giocatori
+      const newPlayer = {
+        id: players.length + 1,
+        name: `Giocatore ${players.length + 1}`,
+        score: 0,
+      };
+      setPlayers([...players, newPlayer]);
+    }
   };
 
   return (
@@ -20,6 +23,8 @@ function App() {
       <div className="board-wrapper">
         <Board onCellClick={() => {}} />
       </div>
+      
+      {/* Sezione giocatori */}
       <PlayerList players={players} addPlayer={addPlayer} />
     </div>
   );
