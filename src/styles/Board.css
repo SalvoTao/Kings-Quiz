@@ -1,0 +1,38 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 0.5fr repeat(5, 1fr);
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .header {
+    background-color: #1E3A8A;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .cell {
+    background-color: #2563EB;
+    padding: 25px;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .cell:hover {
+    background-color: #1E40AF;
+    transform: scale(1.05);
+  }  
