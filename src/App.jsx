@@ -8,10 +8,10 @@ function App() {
 
   // Funzione per aggiungere un giocatore
   const addPlayer = () => {
-    if (players.length < 6) {
+    if (players.length < 4) {
       const newPlayer = {
         id: players.length + 1,
-        name: `Giocatore ${players.length + 1}`,
+        name: "",
         score: 0,
       };
       setPlayers([...players, newPlayer]);
@@ -23,6 +23,13 @@ function App() {
     setPlayers(players.filter(player => player.id !== id));
   };
 
+  // Funzione per aggiornare il nome del giocatore
+  const updatePlayerName = (id, newName) => {
+    setPlayers(players.map(player =>
+      player.id === id ? { ...player, name: newName } : player
+    ));
+  };
+
   return (
     <div className="app-container no-scroll" style={{ fontFamily: "Poppins, sans-serif" }}>
       <div className="board-wrapper">
@@ -30,7 +37,12 @@ function App() {
       </div>
 
       {/* Sezione giocatori */}
-      <PlayerList players={players} addPlayer={addPlayer} removePlayer={removePlayer} />
+      <PlayerList 
+        players={players} 
+        addPlayer={addPlayer} 
+        removePlayer={removePlayer} 
+        updatePlayerName={updatePlayerName} 
+      />
     </div>
   );
 }

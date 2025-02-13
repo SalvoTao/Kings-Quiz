@@ -1,17 +1,16 @@
-/* Blocca la sezione dei giocatori in basso */
 .players-section {
   position: fixed;
   bottom: 0;
   width: 100vw;
-  height: 15vh; /* Aumentiamo lo spazio per i giocatori */
-  padding: 15px;
+  height: 15vh; /* Altezza adattabile */
+  padding: 1vw; /* Padding in base alla grandezza dello schermo */
   background-color: #1E3A8A;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Gli elementi iniziano dall'alto */
-  gap: 10px;
+  justify-content: space-between;
+  gap: 0.5vw; /* Spazio tra i giocatori */
 }
   
 .players-container {
@@ -25,21 +24,27 @@
 .player-box {
   position: relative;
   background: linear-gradient(135deg, #2563EB, #1E40AF);
-  padding: 12px 20px;
+  padding: 10px 15px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 120px;
+  max-width: 100%;
   color: white;
   font-weight: bold;
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .player-box:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Quando il nome si allunga, il box si adatta */
+.player-box:has(.player-name-input:focus) {
+  min-width: 150px;
+  max-width: 250px;
 }
 
 .player-name {
@@ -53,7 +58,11 @@
 
 .add-player-btn {
   padding: 12px 20px;
-  font-size: 16px;
+  font-size: 1.2vw;
+  padding: 0.5vw 1vw;
+  position: relative;
+  bottom: 1vh; /* Alza leggermente il pulsante */
+  max-height: 5vh; /* Impedisce che vada sotto la barra di Windows */
   background: #10B981;
   color: white;
   border: none;
@@ -70,12 +79,12 @@
 /* Bottone per rimuovere un giocatore */
 .remove-player-btn {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: -5px; /* Avvicina la X all'angolo */
+  right: -5px; /* La sposta verso destra */
   background: red;
   color: white;
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -84,8 +93,31 @@
   align-items: center;
   justify-content: center;
   transition: background 0.3s ease;
+  line-height: 1;
 }
 
 .remove-player-btn:hover {
   background: darkred;
+}
+
+/* Input del nome del giocatore */
+.player-name-input {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  background: white;
+  border: 2px solid #1E3A8A;
+  border-radius: 5px;
+  padding: 5px;
+  min-width: 100px;
+  width: auto;
+  max-width: 100%;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Permette all'input di espandersi in base al testo inserito */
+.player-name-input:focus {
+  outline: none;
+  min-width: 120px;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/PlayerList.css";
 
-function PlayerList({ players, addPlayer, removePlayer }) {
+function PlayerList({ players, addPlayer, removePlayer, updatePlayerName }) {
   return (
     <div className="players-section">
       <div className="players-container">
@@ -9,7 +9,14 @@ function PlayerList({ players, addPlayer, removePlayer }) {
           <div key={player.id} className="player-box">
             {/* Bottone per rimuovere il giocatore */}
             <button className="remove-player-btn" onClick={() => removePlayer(player.id)}>×</button>
-            <span className="player-name">{player.name}</span>
+            {/* Input per modificare il nome del giocatore */}
+            <input 
+              type="text"
+              className="player-name-input"
+              value={player.name}
+              onChange={(e) => updatePlayerName(player.id, e.target.value)}
+              placeholder="Inserisci nome"
+            />
             <span className="player-score">{player.score} punti</span>
           </div>
         ))}
@@ -19,9 +26,9 @@ function PlayerList({ players, addPlayer, removePlayer }) {
       <button 
         className="add-player-btn" 
         onClick={addPlayer} 
-        disabled={players.length >= 6}
+        disabled={players.length >= 4}
       >
-        {players.length >= 6 ? "Numero massimo raggiunto" : "Aggiungi Giocatore"}
+        {players.length >= 4 ? "Numero massimo raggiunto" : "Aggiungi Giocatore"}
       </button>
     </div>
   );

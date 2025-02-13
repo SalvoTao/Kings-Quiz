@@ -1,23 +1,23 @@
 .board-wrapper {
-  width: 99vw;  /* Occupa tutta la larghezza dello schermo */
-  height: 80vh;  /* Occupa quasi tutto lo schermo lasciando spazio ai giocatori */
+  width: 99vw; /* Usa il 90% della larghezza dello schermo */
+  height: 75vh; /* Usa il 75% della larghezza dello schermo */
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 0.8%;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%); /* Centra la griglia con lo spazio ai lati */
+  transform: translateX(-50%);
 }
 
+/* Impostiamo la griglia con celle proporzionali */
 .board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(120px, 1fr)); /* Celle flessibili */
   grid-template-rows: 0.5fr repeat(5, 1fr);
   gap: 5px;
   width: 100%;
   height: 100%;
-  position: absolute; /* Fissa la posizione */
 }
   
 .header {
@@ -32,14 +32,15 @@
   color: white;
 }
 
+/* Celle responsive */
 .cell {
-  background-color: #2563EB; /* Blu originale */
-  padding: 25px;
-  font-size: 22px;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #2563EB;
+  padding: 2vw; /* Si adatta alla grandezza dello schermo */
+  font-size: 1.5vw; /* Adatta la grandezza del font */
+  cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
   border-radius: 5px;
   color: white;

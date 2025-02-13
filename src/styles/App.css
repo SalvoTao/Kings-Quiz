@@ -1,12 +1,11 @@
-/* Impedisce lo scrolling su tutta la pagina */
 html, body {
-  overflow: hidden;
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden; /* Evitiamo scrolling */
 }
 
-/* Assicura che l'app occupi tutto lo schermo */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -16,5 +15,4 @@ html, body {
   height: 100vh;
   background-color: #121212;
   color: white;
-  overflow: hidden;
 }
