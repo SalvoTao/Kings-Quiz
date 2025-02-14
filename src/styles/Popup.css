@@ -121,8 +121,16 @@
 
 /* Effetto hover */
 .num-btn:hover {
-  background: #FFD700;
-  transform: scale(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 0px #995f00, 0px 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Pulsante disabilitato */
+.num-btn.disabled {
+  background: gray !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
 }
 
 /* Effetto 3D per il logo */

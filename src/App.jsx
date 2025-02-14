@@ -36,15 +36,17 @@ function App() {
             <h2>Seleziona il numero di giocatori</h2>
             <div className="player-selection">
               <button 
-                className="num-btn" 
-                onClick={() => setNumPlayers((prev) => prev > 2 ? prev - 1 : 2)} // Blocca a 2
+                className={`num-btn ${numPlayers === 2 ? "disabled" : ""}`} 
+                onClick={() => setNumPlayers((prev) => Math.max(2, prev - 1))}
+                disabled={numPlayers === 2}
               >
                 -
               </button>
               <span className="num-display">{numPlayers}</span>
               <button 
-                className="num-btn" 
+                className={`num-btn ${numPlayers === 5 ? "disabled" : ""}`} 
                 onClick={() => setNumPlayers((prev) => Math.min(5, prev + 1))}
+                disabled={numPlayers === 5}
               >
                 +
               </button>
