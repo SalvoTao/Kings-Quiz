@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Board from "./Board";
 import PlayerList from "./PlayerList";
 import "./styles/App.css";
-import "./styles/Popup.css"; // Import del file CSS per il popup
+import "./styles/Popup.css"; // Import CSS del popup
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -17,17 +17,16 @@ function App() {
       score: 0,
     }));
     setPlayers(newPlayers);
-    setShowPopup(false); // Chiude il popup dopo la selezione
+    setShowPopup(false);
   };
 
   return (
-    <div className="app-container no-scroll">
+    <div className="app-container">
       {/* Popup per selezionare il numero di giocatori */}
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
             <h2>Seleziona il numero di giocatori</h2>
-            {/* Nuovo selettore con + e - */}
             <div className="player-selection">
               <button className="num-btn" onClick={() => setNumPlayers((prev) => Math.max(1, prev - 1))}>-</button>
               <span className="num-display">{numPlayers}</span>
@@ -42,7 +41,7 @@ function App() {
 
       {/* Griglia del quiz */}
       <div className="board-wrapper">
-        <Board onCellClick={() => {}} />
+        <Board />
       </div>
 
       {/* Lista giocatori */}

@@ -26,11 +26,9 @@ function PlayerList({ players, setPlayers }) {
         {players.map((player) => (
           <div 
             key={player.id} 
-            className={`player-box ${leaders.length === 1 && player.score === maxScore ? "leader" : ""}`} // Solo se c'è un unico leader
+            className={`player-box ${leaders.length === 1 && player.score === maxScore ? "leader" : ""}`} 
           >
-            {/* Bottone per rimuovere il giocatore */}
             <button className="remove-player-btn" onClick={() => removePlayer(player.id)}>×</button>
-            {/* Input per modificare il nome del giocatore */}
             <input 
               type="text"
               className="player-name-input"

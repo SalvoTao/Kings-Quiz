@@ -5,59 +5,76 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.75); /* Sfondo scuro trasparente */
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Stile del popup con effetto vetro */
+/* Stile del popup */
 .popup {
-  background: rgba(30, 58, 138, 0.9); /* Blu con trasparenza */
+  background: rgba(30, 58, 138, 0.9);
   padding: 25px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0px 4px 15px rgba(255, 215, 0, 0.5); /* Glow dorato */
+  box-shadow: 0px 4px 15px rgba(255, 215, 0, 0.5);
   color: white;
   font-family: 'Poppins', sans-serif;
-  backdrop-filter: blur(10px); /* Effetto vetro */
-  border: 2px solid rgba(255, 215, 0, 0.5); /* Bordo dorato leggero */
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 215, 0, 0.5);
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Titolo del popup */
+/* Titolo */
 .popup h2 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-size: 2rem;
   font-weight: 600;
 }
 
-/* Input per il numero di giocatori */
-.popup input {
-  width: 60px;
-  font-size: 1.5rem;
-  text-align: center;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+/* Contenitore selezione giocatori */
+.player-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Stile numero giocatori */
+.num-display {
+  font-size: 2rem;
   font-weight: bold;
-  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 8px;
   border: 2px solid rgba(255, 215, 0, 0.5);
-  display: block;
-  margin: 0 auto; /* Più spazio sotto */
+  color: white;
+  min-width: 50px;
+  text-align: center;
 }
 
-/* Effetto quando l'input è selezionato */
-.popup input:focus {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: gold;
+/* Pulsanti + e - */
+.num-btn {
+  background: gold;
+  color: black;
+  border: none;
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-weight: bold;
+  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.7);
 }
 
-/* Stile del bottone di avvio */
+.num-btn:hover {
+  background: #FFD700;
+  transform: scale(1.1);
+}
+
+/* Stile del pulsante "Inizia il gioco" */
 .start-game-btn {
   background: gold;
   color: black;
@@ -82,45 +99,4 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
-}
-/* Contenitore del selettore giocatori */
-.player-selection {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px; /* Distanza tra i pulsanti e il numero */
-  margin-bottom: 25px; /* Spazio sotto */
-}
-
-/* Stile del numero visualizzato */
-.num-display {
-  font-size: 2rem;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 2px solid rgba(255, 215, 0, 0.5);
-  color: white;
-  min-width: 50px;
-  text-align: center;
-}
-
-/* Stile dei pulsanti + e - */
-.num-btn {
-  background: gold;
-  color: black;
-  border: none;
-  font-size: 1.5rem;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  font-weight: bold;
-  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.7);
-}
-
-/* Effetto hover */
-.num-btn:hover {
-  background: #FFD700;
-  transform: scale(1.1);
 }
