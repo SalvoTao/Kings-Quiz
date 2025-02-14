@@ -1,6 +1,6 @@
 .board-wrapper {
-  width: 99vw; /* Usa il 90% della larghezza dello schermo */
-  height: 75vh; /* Usa il 75% della larghezza dello schermo */
+  width: 99vw;
+  height: calc(100vh - var(--players-bar-height) - 5vh); /* Altezza dinamica basata sulla barra */
   display: flex;
   justify-content: center;
   align-items: center;

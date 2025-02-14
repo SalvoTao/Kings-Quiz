@@ -30,6 +30,13 @@ function App() {
     ));
   };
 
+  // Funzione per aggiornare il punteggio del giocatore
+  const updatePlayerScore = (id, amount) => {
+    setPlayers(players.map(player =>
+      player.id === id ? { ...player, score: player.score + amount } : player
+    ));
+  };
+
   return (
     <div className="app-container no-scroll" style={{ fontFamily: "Poppins, sans-serif" }}>
       <div className="board-wrapper">
@@ -42,6 +49,7 @@ function App() {
         addPlayer={addPlayer} 
         removePlayer={removePlayer} 
         updatePlayerName={updatePlayerName} 
+        updatePlayerScore={updatePlayerScore}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/PlayerList.css";
 
-function PlayerList({ players, addPlayer, removePlayer, updatePlayerName }) {
+function PlayerList({ players, addPlayer, removePlayer, updatePlayerName, updatePlayerScore }) {
   return (
     <div className="players-section">
       <div className="players-container">
@@ -17,7 +17,12 @@ function PlayerList({ players, addPlayer, removePlayer, updatePlayerName }) {
               onChange={(e) => updatePlayerName(player.id, e.target.value)}
               placeholder="Inserisci nome"
             />
-            <span className="player-score">{player.score} punti</span>
+            {/* Area per i punti con i pulsanti + e - */}
+            <div className="score-controls">
+              <button className="minus-btn" onClick={() => updatePlayerScore(player.id, -100)}>-</button>
+              <span className="player-score">{player.score}</span>
+              <button className="plus-btn" onClick={() => updatePlayerScore(player.id, 100)}>+</button>
+            </div>
           </div>
         ))}
       </div>
