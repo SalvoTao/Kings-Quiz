@@ -2,8 +2,8 @@ import React from "react";
 import "./styles/PlayerList.css";
 
 function PlayerList({ players, addPlayer, removePlayer, updatePlayerName, updatePlayerScore }) {
-  // Trova il punteggio massimo tra i giocatori
-  const maxScore = Math.max(...players.map(player => player.score), 0);
+  // Trova il punteggio massimo tra i giocatori (anche se negativo)
+  const maxScore = players.length > 0 ? Math.max(...players.map(player => player.score)) : null;
 
   // Conta quanti giocatori hanno il punteggio massimo
   const leaders = players.filter(player => player.score === maxScore);
