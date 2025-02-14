@@ -8,6 +8,20 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [showPopup, setShowPopup] = useState(true);
   const [numPlayers, setNumPlayers] = useState(2);
+
+  const [selectedCategories, setSelectedCategories] = useState(["Sport"]); // Default con almeno 1 selezionata
+  const categories = ["Sport", "Scienza", "Geografia", "Storia", "Cinema", "Musica", "Letteratura", "Informatica", 
+                  "Matematica", "Geometria"];
+  const toggleCategory = (category) => {
+    if (selectedCategories.includes(category)) {
+      // Impedisce di deselezionare l'ultima categoria rimasta
+      if (selectedCategories.length > 1) {
+        setSelectedCategories(selectedCategories.filter((cat) => cat !== category));
+      }
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+  };
   
   const removePlayer = (id) => {
     if (players.length > 2) { // Impedisce di rimuovere giocatori sotto i 2
@@ -28,11 +42,13 @@ function App() {
 
   return (
     <div className="app-container">
+
       {/* Popup per selezionare il numero di giocatori */}
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
             <img src="/images/kings-quiz-logo.png" alt="Kings Quiz Logo" className="popup-logo" />
+            {/* Scelta numero giocatori */}
             <h2>Seleziona il numero di giocatori</h2>
             <div className="player-selection">
               <button 
@@ -50,6 +66,22 @@ function App() {
               >
                 +
               </button>
+            </div>
+
+            {/* Scelta delle categorie */}
+            <div className="category-selection">
+              <h3>Scegli le categorie:</h3>
+              <div className="category-list">
+                {categories.map((category) => (
+                  <div 
+                    key={category} 
+                    className={`category-option ${selectedCategories.includes(category) ? "selected" : ""}`} 
+                    onClick={() => toggleCategory(category)}
+                  >
+                    {category}
+                  </div>
+                ))}
+              </div>
             </div>
             <button className="start-game-btn" onClick={initializePlayers}>
               Inizia il gioco

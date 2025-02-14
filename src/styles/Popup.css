@@ -186,3 +186,69 @@
   transform: translateY(2px);
   box-shadow: 0px 2px 0px #5a3d00, 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
+/* Contenitore delle categorie */
+.category-selection {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Titolo categorie */
+.category-selection h3 {
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* Lista delle categorie */
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px; /* Ridotto lo spazio tra i box */
+}
+
+/* Singola categoria */
+.category-option {
+  background: linear-gradient(to bottom, #1E3A8A, #2563EB); /* Effetto sfumatura */
+  color: white;
+  padding: 10px 16px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ombra per rilievo */
+  border: 2px solid transparent; /* Bordo trasparente per effetto hover */
+}
+
+/* Effetto al passaggio del mouse */
+.category-option:hover {
+  background: linear-gradient(to bottom, #2563EB, #1E40AF);
+  transform: scale(1.05); /* Leggero ingrandimento */
+  border: 2px solid gold; /* Evidenziazione */
+}
+
+/* Effetto categoria selezionata */
+.category-option input:checked + label {
+  background: linear-gradient(to bottom, #FFD700, #FFA500); /* Effetto dorato */
+  color: black;
+  border: 2px solid white;
+  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.6);
+}
+
+/* Nascondiamo la checkbox */
+.category-option input {
+  display: none;
+}
+
+/* Categoria selezionata - Effetto attivo */
+.category-option.selected {
+  background: linear-gradient(to bottom, #FFD700, #FFA500); /* Oro */
+  color: black;
+  border: 2px solid white;
+  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.6);
+  transform: scale(1.05);
+}
