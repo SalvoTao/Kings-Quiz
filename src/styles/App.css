@@ -1,18 +1,16 @@
-html, body {
-  height: 100%;
-  width: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Applichiamo il font a tutto il sito */
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Evitiamo scrolling */
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
   background-color: #121212;
   color: white;
+}
+
+/* Se vuoi usare Montserrat invece di Poppins, cambia qui */
+.app-container {
+  font-family: "Montserrat", sans-serif;
 }

@@ -1,56 +1,52 @@
 import React, { useState } from "react";
 import Board from "./Board";
-import PlayerList from "./PlayerList"; 
+import PlayerList from "./PlayerList";
 import "./styles/App.css";
+import "./styles/Popup.css"; // Import del file CSS per il popup
 
 function App() {
   const [players, setPlayers] = useState([]);
+  const [showPopup, setShowPopup] = useState(true);
+  const [numPlayers, setNumPlayers] = useState(1);
 
-  // Funzione per aggiungere un giocatore
-  const addPlayer = () => {
-    if (players.length < 4) {
-      const newPlayer = {
-        id: players.length + 1,
-        name: "",
-        score: 0,
-      };
-      setPlayers([...players, newPlayer]);
-    }
-  };
-
-  // Funzione per rimuovere un giocatore
-  const removePlayer = (id) => {
-    setPlayers(players.filter(player => player.id !== id));
-  };
-
-  // Funzione per aggiornare il nome del giocatore
-  const updatePlayerName = (id, newName) => {
-    setPlayers(players.map(player =>
-      player.id === id ? { ...player, name: newName } : player
-    ));
-  };
-
-  // Funzione per aggiornare il punteggio del giocatore
-  const updatePlayerScore = (id, amount) => {
-    setPlayers(players.map(player =>
-      player.id === id ? { ...player, score: player.score + amount } : player
-    ));
+  // Funzione per inizializzare i giocatori
+  const initializePlayers = () => {
+    const newPlayers = Array.from({ length: numPlayers }, (_, i) => ({
+      id: i + 1,
+      name: `Giocatore ${i + 1}`,
+      score: 0,
+    }));
+    setPlayers(newPlayers);
+    setShowPopup(false); // Chiude il popup dopo la selezione
   };
 
   return (
-    <div className="app-container no-scroll" style={{ fontFamily: "Poppins, sans-serif" }}>
+    <div className="app-container no-scroll">
+      {/* Popup per selezionare il numero di giocatori */}
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <h2>Seleziona il numero di giocatori</h2>
+            {/* Nuovo selettore con + e - */}
+            <div className="player-selection">
+              <button className="num-btn" onClick={() => setNumPlayers((prev) => Math.max(1, prev - 1))}>-</button>
+              <span className="num-display">{numPlayers}</span>
+              <button className="num-btn" onClick={() => setNumPlayers((prev) => Math.min(4, prev + 1))}>+</button>
+            </div>
+            <button className="start-game-btn" onClick={initializePlayers}>
+              Inizia il gioco
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Griglia del quiz */}
       <div className="board-wrapper">
         <Board onCellClick={() => {}} />
       </div>
 
-      {/* Sezione giocatori */}
-      <PlayerList 
-        players={players} 
-        addPlayer={addPlayer} 
-        removePlayer={removePlayer} 
-        updatePlayerName={updatePlayerName} 
-        updatePlayerScore={updatePlayerScore}
-      />
+      {/* Lista giocatori */}
+      <PlayerList players={players} setPlayers={setPlayers} />
     </div>
   );
 }

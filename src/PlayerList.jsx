@@ -1,12 +1,24 @@
 import React from "react";
 import "./styles/PlayerList.css";
 
-function PlayerList({ players, addPlayer, removePlayer, updatePlayerName, updatePlayerScore }) {
+function PlayerList({ players, setPlayers }) {
   // Trova il punteggio massimo tra i giocatori (anche se negativo)
   const maxScore = players.length > 0 ? Math.max(...players.map(player => player.score)) : null;
 
   // Conta quanti giocatori hanno il punteggio massimo
   const leaders = players.filter(player => player.score === maxScore);
+
+  // Funzione per rimuovere un giocatore
+  const removePlayer = (id) => {
+    setPlayers(players.filter(player => player.id !== id));
+  };
+
+  // Funzione per aggiornare il punteggio del giocatore
+  const updatePlayerScore = (id, amount) => {
+    setPlayers(players.map(player =>
+      player.id === id ? { ...player, score: player.score + amount } : player
+    ));
+  };
 
   return (
     <div className="players-section">
@@ -23,10 +35,8 @@ function PlayerList({ players, addPlayer, removePlayer, updatePlayerName, update
               type="text"
               className="player-name-input"
               value={player.name}
-              onChange={(e) => updatePlayerName(player.id, e.target.value)}
-              placeholder="Inserisci nome"
+              onChange={(e) => setPlayers(players.map(p => p.id === player.id ? { ...p, name: e.target.value } : p))}
             />
-            {/* Area per i punti con i pulsanti + e - */}
             <div className="score-controls">
               <button className="minus-btn" onClick={() => updatePlayerScore(player.id, -100)}>-</button>
               <span className="player-score">{player.score}</span>
@@ -35,15 +45,6 @@ function PlayerList({ players, addPlayer, removePlayer, updatePlayerName, update
           </div>
         ))}
       </div>
-
-      {/* Pulsante per aggiungere giocatori */}
-      <button 
-        className="add-player-btn" 
-        onClick={addPlayer} 
-        disabled={players.length >= 4}
-      >
-        {players.length >= 4 ? "Numero massimo raggiunto" : "Aggiungi Giocatore"}
-      </button>
     </div>
   );
 }
