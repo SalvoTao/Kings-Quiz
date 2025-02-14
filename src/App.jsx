@@ -9,17 +9,28 @@ function App() {
   const [showPopup, setShowPopup] = useState(true);
   const [numPlayers, setNumPlayers] = useState(2);
 
-  const [selectedCategories, setSelectedCategories] = useState(["Sport"]); // Default con almeno 1 selezionata
+  const [selectedCategories, setSelectedCategories] = useState([]); // Nessuna categoria selezionata all'inizio
   const categories = ["Sport", "Scienza", "Geografia", "Storia", "Cinema", "Musica", "Letteratura", "Informatica", 
                   "Matematica", "Geometria"];
   const toggleCategory = (category) => {
     if (selectedCategories.includes(category)) {
-      // Impedisce di deselezionare l'ultima categoria rimasta
-      if (selectedCategories.length > 1) {
-        setSelectedCategories(selectedCategories.filter((cat) => cat !== category));
-      }
+      setSelectedCategories(selectedCategories.filter((cat) => cat !== category));
     } else {
       setSelectedCategories([...selectedCategories, category]);
+    }
+  };
+
+  const startGame = () => {
+    if (selectedCategories.length >= 5) {
+      // Creiamo i giocatori automaticamente in base al numero selezionato
+      const initialPlayers = Array.from({ length: numPlayers }, (_, index) => ({
+        id: index + 1,
+        name: `Giocatore ${index + 1}`,
+        score: 0,
+      }));
+  
+      setPlayers(initialPlayers); // Imposta i giocatori
+      setShowPopup(false); // Nasconde il popup
     }
   };
   
@@ -82,9 +93,20 @@ function App() {
                   </div>
                 ))}
               </div>
+
+              {/* 🔹 Aggiungi qui il messaggio di avviso sotto la lista delle categorie */}
+              <p className={`category-warning ${selectedCategories.length < 5 ? "red" : "green"}`}>
+                {selectedCategories.length < 5 
+                  ? "Seleziona almeno 5 categorie per iniziare!" 
+                  : "Minimo raggiunto! Puoi selezionare altre categorie se vuoi."}
+              </p>
             </div>
-            <button className="start-game-btn" onClick={initializePlayers}>
-              Inizia il gioco
+            <button 
+              className={`start-game-btn ${selectedCategories.length < 5 ? "disabled" : "enabled"}`} 
+              onClick={startGame} 
+              disabled={selectedCategories.length < 5}
+            >
+              INIZIA IL GIOCO
             </button>
           </div>
         </div>

@@ -59,23 +59,47 @@
 
 /* Stile del bottone di avvio */
 .start-game-btn {
-  background: gold;
+  background: gray;
   color: black;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   padding: 12px 20px;
   margin-top: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  font-weight: bold;
-  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.7);
+  border: 2px solid darkgray;
+  cursor: not-allowed;
+  transition: all 0.3s ease-in-out;
+  box-shadow: none;
 }
 
 /* Effetto hover sul pulsante */
 .start-game-btn:hover {
-  background: #FFD700;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 0px #995f00, 0px 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Quando attivo (almeno 5 categorie selezionate) */
+.start-game-btn.enabled {
+  background: #4CAF50; /* Verde uguale all’avviso */
+  color: white;
+  cursor: pointer;
+  border: 2px solid darkgreen;
+  box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.start-game-btn.enabled:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 12px rgba(0, 128, 0, 0.6);
+}
+
+/* Pulsante disabilitato */
+.start-game-btn.disabled {
+  background: gray !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
 }
 
 /* Animazione di comparsa */
@@ -251,4 +275,27 @@
   border: 2px solid white;
   box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.6);
   transform: scale(1.05);
+}
+
+/* Messaggio di avviso iniziale (sfondo rosso) */
+.category-warning {
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 5px;
+  border-radius: 7px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Quando ci sono meno di 5 categorie (sfondo rosso) */
+.category-warning.red {
+  background: #ff4d4d; /* Rosso acceso */
+  color: white;
+  border: 1px solid darkred;
+}
+
+/* Quando ci sono almeno 5 categorie (sfondo verde) */
+.category-warning.green {
+  background: #4CAF50; /* Verde acceso */
+  color: white;
+  border: 1px solid darkgreen;
 }
