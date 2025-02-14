@@ -26,6 +26,7 @@ function App() {
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
+            <img src="/images/kings-quiz-logo.png" alt="Kings Quiz Logo" className="popup-logo" />
             <h2>Seleziona il numero di giocatori</h2>
             <div className="player-selection">
               <button className="num-btn" onClick={() => setNumPlayers((prev) => Math.max(1, prev - 1))}>-</button>
