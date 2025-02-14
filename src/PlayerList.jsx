@@ -28,7 +28,10 @@ function PlayerList({ players, setPlayers }) {
             key={player.id} 
             className={`player-box ${leaders.length === 1 && player.score === maxScore ? "leader" : ""}`} 
           >
-            <button className="remove-player-btn" onClick={() => removePlayer(player.id)}>×</button>
+            {/* Rendi la X disattivata se ci sono solo 2 giocatori */}
+            {players.length > 2 && (
+              <button className="remove-player-btn" onClick={() => removePlayer(player.id)}>✖</button>
+            )}
             <input 
               type="text"
               className="player-name-input"

@@ -148,3 +148,33 @@
     transform: translateX(-50%) perspective(500px) rotateX(15deg) translateY(-3px);
   }
 }
+
+/* Stile aggiornato per i pulsanti del popup */
+.popup button {
+  background: linear-gradient(to bottom, #FFD700, #FFA500); /* Stesso giallo dorato del logo */
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+  
+  /* Effetto 3D */
+  box-shadow: 0px 4px 0px #cc8400, 0px 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Effetto al passaggio del mouse */
+.popup button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 0px #995f00, 0px 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Effetto click */
+.popup button:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px #5a3d00, 0px 4px 8px rgba(0, 0, 0, 0.5);
+}

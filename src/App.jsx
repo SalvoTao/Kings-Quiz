@@ -7,7 +7,13 @@ import "./styles/Popup.css"; // Import CSS del popup
 function App() {
   const [players, setPlayers] = useState([]);
   const [showPopup, setShowPopup] = useState(true);
-  const [numPlayers, setNumPlayers] = useState(1);
+  const [numPlayers, setNumPlayers] = useState(2);
+  
+  const removePlayer = (id) => {
+    if (players.length > 2) { // Impedisce di rimuovere giocatori sotto i 2
+      setPlayers(players.filter(player => player.id !== id));
+    }
+  };
 
   // Funzione per inizializzare i giocatori
   const initializePlayers = () => {
@@ -29,9 +35,19 @@ function App() {
             <img src="/images/kings-quiz-logo.png" alt="Kings Quiz Logo" className="popup-logo" />
             <h2>Seleziona il numero di giocatori</h2>
             <div className="player-selection">
-              <button className="num-btn" onClick={() => setNumPlayers((prev) => Math.max(1, prev - 1))}>-</button>
+              <button 
+                className="num-btn" 
+                onClick={() => setNumPlayers((prev) => prev > 2 ? prev - 1 : 2)} // Blocca a 2
+              >
+                -
+              </button>
               <span className="num-display">{numPlayers}</span>
-              <button className="num-btn" onClick={() => setNumPlayers((prev) => Math.min(4, prev + 1))}>+</button>
+              <button 
+                className="num-btn" 
+                onClick={() => setNumPlayers((prev) => Math.min(5, prev + 1))}
+              >
+                +
+              </button>
             </div>
             <button className="start-game-btn" onClick={initializePlayers}>
               Inizia il gioco
