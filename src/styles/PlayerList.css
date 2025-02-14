@@ -156,4 +156,41 @@
   box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
   transform: scale(1.1); /* Ingrandisce leggermente il leader */
   transition: all 0.3s ease-in-out;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0px 0px 30px rgba(255, 215, 0, 1);
+  }
+}
+
+.leader::before {
+  content: "👑";
+  position: absolute;
+  top: -25px;
+  font-size: 30px;
+  animation: crownBounce 1s infinite alternate;
+}
+
+/* Effetto rimbalzo della corona */
+@keyframes crownBounce {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Punteggio del leader più grande e dorato */
+.leader .player-score {
+  font-size: 2rem; /* Punteggio più grande */
+  font-weight: bold;
+  color: gold;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.9); /* Effetto glow */
+  transition: all 0.3s ease-in-out;
 }
