@@ -20,7 +20,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 1.5vw;
   margin-bottom: 15px;
 }
 
@@ -148,4 +148,12 @@
 
 .minus-btn:hover, .plus-btn:hover {
   background-color: #2563EB;
+}
+
+/* Stile speciale per il giocatore in vantaggio (se non c'è pareggio) */
+.leader {
+  border: 3px solid gold;
+  box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
+  transform: scale(1.1); /* Ingrandisce leggermente il leader */
+  transition: all 0.3s ease-in-out;
 }
