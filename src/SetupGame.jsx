@@ -81,9 +81,15 @@ const SetupGame = ({
                         className={`start-game-btn ${selectedCategories.length < 5 ? "disabled" : "enabled"}`}
                         onClick={handleStartGame} // ✅ ORA FUNZIONA CORRETTAMENTE
                         disabled={selectedCategories.length < 5}
+                        style={{ marginBottom: "20px" }} // Aggiunge spazio sotto il pulsante
                     >
                         INIZIA IL GIOCO
                     </button>
+
+                    {/* Versione del gioco */}
+                    <p className="game-version">
+                        &copy; {new Date().getFullYear()} Kings Quiz | Versione 1.0.0
+                    </p>
                 </div>
             </div>
         </>
