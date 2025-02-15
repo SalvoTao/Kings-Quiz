@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles/Popup.css";
 
-const SetupGame = ({ setPlayers, setShowPopup, startGame }) => {
-    const [numPlayers, setNumPlayers] = useState(2);
-    const [selectedCategories, setSelectedCategories] = useState([]);
+const SetupGame = ({
+    setPlayers,
+    setShowPopup,
+    startGame,
+    numPlayers,
+    setNumPlayers,
+    selectedCategories,
+    setSelectedCategories
+}) => {
 
     const categoriesList = [
         "Sport", "Scienza", "Geografia", "Storia", "Cinema", "Musica", "Letteratura", "Tecnologia"
@@ -17,11 +23,18 @@ const SetupGame = ({ setPlayers, setShowPopup, startGame }) => {
         }
     };
 
+    const handleStartGame = () => {
+        if (selectedCategories.length >= 5) {
+            startGame(); // ✅ CREA i giocatori
+            setTimeout(() => {
+                setShowPopup(false); // ✅ CHIUDE il popup DOPO che i giocatori sono stati creati
+            }, 100);
+        }
+    };
+
     return (
         <>
-            {/* Overlay per sfocare solo lo sfondo */}
             <div className="overlay"></div>
-            {/* Popup che rimane nitido */}
             <div className="popup-overlay">
                 <div className="popup">
                     <img src="/images/kings-quiz-logo.png" alt="Kings Quiz Logo" className="popup-logo" />
@@ -66,11 +79,7 @@ const SetupGame = ({ setPlayers, setShowPopup, startGame }) => {
 
                     <button
                         className={`start-game-btn ${selectedCategories.length < 5 ? "disabled" : "enabled"}`}
-                        onClick={() => {
-                            if (selectedCategories.length >= 5) {
-                                startGame(); // 🔹 ORA chiama correttamente la funzione di App.jsx
-                            }
-                        }}
+                        onClick={handleStartGame} // ✅ ORA FUNZIONA CORRETTAMENTE
                         disabled={selectedCategories.length < 5}
                     >
                         INIZIA IL GIOCO

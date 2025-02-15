@@ -8,18 +8,20 @@ import SetupGame from "./SetupGame";
 function App() {
   const [players, setPlayers] = useState([]);
   const [showPopup, setShowPopup] = useState(true);
+  const [numPlayers, setNumPlayers] = useState(2);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const startGame = () => {
     if (selectedCategories.length >= 5) {
-      // Creiamo i giocatori automaticamente in base al numero selezionato
+      // ✅ Creiamo i giocatori automaticamente
       const initialPlayers = Array.from({ length: numPlayers }, (_, index) => ({
         id: index + 1,
         name: `Giocatore ${index + 1}`,
         score: 0,
       }));
 
-      setPlayers(initialPlayers); // Imposta i giocatori
-      setShowPopup(false); // Nasconde il popup
+      setPlayers(initialPlayers); // ✅ Imposta i giocatori
+      setShowPopup(false); // ✅ CHIUDE IL POPUP
     }
   };
 
@@ -45,12 +47,17 @@ function App() {
       {showPopup && <div className="overlay"></div>} {/* Aggiunto l'overlay sfocato */}
 
       {/* Popup iniziale di SetupGames */}
-      <SetupGame
-        setPlayers={setPlayers}
-        setShowPopup={setShowPopup}
-        startGame={startGame} // 🔹 ORA `SetupGame` lo riceve
-      />
-
+      {showPopup && (
+        <SetupGame
+          setPlayers={setPlayers}
+          setShowPopup={setShowPopup}
+          startGame={startGame}
+          numPlayers={numPlayers}
+          setNumPlayers={setNumPlayers}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+        />
+      )}
 
       {/* Griglia del quiz */}
       <div className="board-wrapper">
