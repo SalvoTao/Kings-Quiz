@@ -1,30 +1,28 @@
 import React from "react";
 import "./styles/Board.css";
 
-// Definiamo le categorie e i punteggi
-const categories = ["Sport", "Corpo Umano", "Geografia", "Scienza", "Storia"];
-const points = [100, 200, 300, 400, 500];
+const Board = ({ selectedCategories = [] }) => {
+  // Assicuriamoci che ci siano esattamente 5 categorie
+  const categories = selectedCategories.length === 5 ? selectedCategories : ["?", "?", "?", "?", "?"];
+  const points = [100, 200, 300, 400, 500];
 
-function Board({ onCellClick }) {
   return (
     <div className="board">
-      {/* Righe delle categorie */}
+      {/* RIGA DELLE CATEGORIE */}
       {categories.map((category, index) => (
-        <div key={index} className="header">
-          {category}
-        </div>
+        <div key={index} className="header">{category}</div>
       ))}
 
-      {/* Griglia delle domande */}
-      {points.map((point) =>
-        categories.map((category, index) => (
-          <div key={`${category}-${point}`} className="cell" onClick={() => onCellClick(point, category)}>
+      {/* GRIGLIA DELLE DOMANDE */}
+      {points.map((point, rowIndex) =>
+        categories.map((category, colIndex) => (
+          <div key={`${rowIndex}-${colIndex}`} className="cell">
             {point}
           </div>
         ))
       )}
     </div>
   );
-}
+};
 
 export default Board;

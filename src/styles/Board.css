@@ -13,7 +13,7 @@
 /* Impostiamo la griglia con celle proporzionali */
 .board {
   display: grid;
-  grid-template-columns: repeat(5, minmax(120px, 1fr)); /* Celle flessibili */
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 0.5fr repeat(5, 1fr);
   gap: 5px;
   width: 100%;
@@ -23,7 +23,7 @@
 .header {
   background-color: #1E3A8A;
   padding: 10px;
-  font-size: 20px;
+  font-size: 1.5vw;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -38,8 +38,8 @@
   justify-content: center;
   align-items: center;
   background-color: #2563EB;
-  padding: 2vw; /* Si adatta alla grandezza dello schermo */
-  font-size: 1.5vw; /* Adatta la grandezza del font */
+  padding: 2vw;
+  font-size: 1.5vw;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
   border-radius: 5px;

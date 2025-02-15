@@ -12,6 +12,13 @@ function App() {
 
   const startGame = () => {
     if (selectedCategories.length >= 5) {
+      // Selezioniamo 5 categorie casuali tra quelle scelte
+      const shuffledCategories = [...selectedCategories].sort(() => Math.random() - 0.5);
+      const selected = shuffledCategories.slice(0, 5);
+
+      console.log("Categorie selezionate per la griglia:", selected); // DEBUG
+
+      setSelectedCategories(selected); // 🔹 Ora aggiorna lo stato correttamente
       // ✅ Creiamo i giocatori automaticamente
       const initialPlayers = Array.from({ length: numPlayers }, (_, index) => ({
         id: index + 1,
@@ -19,7 +26,7 @@ function App() {
         score: 0,
       }));
 
-      setPlayers(initialPlayers); // ✅ Imposta i giocatori
+      setPlayers(initialPlayers);
       setShowPopup(false); // ✅ CHIUDE IL POPUP
     }
   };
@@ -60,7 +67,7 @@ function App() {
 
       {/* Griglia del quiz */}
       <div className="board-wrapper">
-        <Board />
+        <Board selectedCategories={selectedCategories} />
       </div>
 
       {/* Lista giocatori */}
