@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Board from "./Board";
 import PlayerList from "./PlayerList";
 import "./styles/App.css";
-import "./styles/Popup.css";
 import SetupGame from "./SetupGame";
 
 function App() {

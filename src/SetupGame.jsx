@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Popup.css";
+import "./styles/SetupGame.css";
 
 const SetupGame = ({
     setPlayers,
