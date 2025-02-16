@@ -1,22 +1,26 @@
 import React from "react";
 import "./styles/Board.css";
 
+/**
+ * Componente Board che gestisce la griglia del quiz.
+ * Mostra le categorie selezionate in cima e i punteggi nelle celle.
+ */
 const Board = ({ selectedCategories = [] }) => {
-  // Assicuriamoci che ci siano esattamente 5 categorie
+  // Assicuriamoci che ci siano esattamente 5 categorie, altrimenti mostriamo i "?"
   const categories = selectedCategories.length === 5 ? selectedCategories : ["?", "?", "?", "?", "?"];
   const points = [100, 200, 300, 400, 500];
 
   return (
     <div className="board">
-      {/* RIGA DELLE CATEGORIE */}
+      {/* Intestazione con le categorie */}
       {categories.map((category, index) => (
-        <div key={index} className="header">{category}</div>
+        <div key={`header-${index}`} className="header">{category}</div>
       ))}
 
-      {/* GRIGLIA DELLE DOMANDE */}
+      {/* Creazione della griglia con punti */}
       {points.map((point, rowIndex) =>
-        categories.map((category, colIndex) => (
-          <div key={`${rowIndex}-${colIndex}`} className="cell">
+        categories.map((_, colIndex) => (
+          <div key={`cell-${rowIndex}-${colIndex}`} className="cell">
             {point}
           </div>
         ))
