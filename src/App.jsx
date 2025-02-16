@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Board from "./Board";
+import QuizGrid from "./QuizGrid";
 import PlayerList from "./PlayerList";
 import "./styles/App.css";
 import SetupGame from "./SetupGame";
@@ -57,7 +57,7 @@ function App() {
 
       {/* 🔹 Griglia del quiz */}
       <div className="board-wrapper">
-        <Board selectedCategories={selectedCategories} />
+        <QuizGrid selectedCategories={selectedCategories} />
       </div>
 
       {/* 🔹 Barra dei giocatori */}

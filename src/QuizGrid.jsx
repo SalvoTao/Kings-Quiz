@@ -1,11 +1,11 @@
 import React from "react";
-import "./styles/Board.css";
+import "./styles/QuizGrid.css";
 
 /**
  * Componente Board che gestisce la griglia del quiz.
  * Mostra le categorie selezionate in cima e i punteggi nelle celle.
  */
-const Board = ({ selectedCategories = [] }) => {
+const QuizGrid = ({ selectedCategories = [] }) => {
   // Assicuriamoci che ci siano esattamente 5 categorie, altrimenti mostriamo i "?"
   const categories = selectedCategories.length === 5 ? selectedCategories : ["?", "?", "?", "?", "?"];
   const points = [100, 200, 300, 400, 500];
@@ -29,4 +29,4 @@ const Board = ({ selectedCategories = [] }) => {
   );
 };
 
-export default Board;
+export default QuizGrid;
