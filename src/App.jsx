@@ -5,21 +5,26 @@ import "./styles/App.css";
 import SetupGame from "./SetupGame";
 
 function App() {
-  const [players, setPlayers] = useState([]);
-  const [showPopup, setShowPopup] = useState(true);
-  const [numPlayers, setNumPlayers] = useState(2);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  // 📌 Stato globale dell'applicazione
+  const [players, setPlayers] = useState([]); // Lista dei giocatori
+  const [showPopup, setShowPopup] = useState(true); // Stato del popup iniziale
+  const [numPlayers, setNumPlayers] = useState(2); // Numero di giocatori selezionato
+  const [selectedCategories, setSelectedCategories] = useState([]); // Categorie selezionate
 
+  /**
+   * 📌 Funzione per iniziare il gioco
+   * - Verifica che siano state selezionate almeno 5 categorie
+   * - Sceglie casualmente 5 categorie tra quelle selezionate
+   * - Genera automaticamente i giocatori
+   * - Nasconde il popup
+   */
   const startGame = () => {
     if (selectedCategories.length >= 5) {
-      // Selezioniamo 5 categorie casuali tra quelle scelte
+      // 🔹 Mischia l'array delle categorie e ne prende 5 casualmente
       const shuffledCategories = [...selectedCategories].sort(() => Math.random() - 0.5);
       const selected = shuffledCategories.slice(0, 5);
 
-      console.log("Categorie selezionate per la griglia:", selected); // DEBUG
-
-      setSelectedCategories(selected); // 🔹 Ora aggiorna lo stato correttamente
-      // ✅ Creiamo i giocatori automaticamente
+      // 🔹 Imposta i giocatori con punteggio iniziale 0
       const initialPlayers = Array.from({ length: numPlayers }, (_, index) => ({
         id: index + 1,
         name: `Giocatore ${index + 1}`,
@@ -27,32 +32,17 @@ function App() {
       }));
 
       setPlayers(initialPlayers);
-      setShowPopup(false); // ✅ CHIUDE IL POPUP
+      setSelectedCategories(selected); // 🔹 Ora aggiorna lo stato correttamente
+      setShowPopup(false); // 🔹 Chiude il popup iniziale
     }
-  };
-
-  const removePlayer = (id) => {
-    if (players.length > 2) { // Impedisce di rimuovere giocatori sotto i 2
-      setPlayers(players.filter(player => player.id !== id));
-    }
-  };
-
-  // Funzione per inizializzare i giocatori
-  const initializePlayers = () => {
-    const newPlayers = Array.from({ length: numPlayers }, (_, i) => ({
-      id: i + 1,
-      name: `Giocatore ${i + 1}`,
-      score: 0,
-    }));
-    setPlayers(newPlayers);
-    setShowPopup(false);
   };
 
   return (
     <div className="app-container">
-      {showPopup && <div className="overlay"></div>} {/* Aggiunto l'overlay sfocato */}
+      {/* 🔹 Sfocatura dello sfondo quando il popup è attivo */}
+      {showPopup && <div className="overlay"></div>}
 
-      {/* Popup iniziale di SetupGames */}
+      {/* 🔹 Popup iniziale per selezionare giocatori e categorie */}
       {showPopup && (
         <SetupGame
           setPlayers={setPlayers}
@@ -65,12 +55,12 @@ function App() {
         />
       )}
 
-      {/* Griglia del quiz */}
+      {/* 🔹 Griglia del quiz */}
       <div className="board-wrapper">
         <Board selectedCategories={selectedCategories} />
       </div>
 
-      {/* Lista giocatori */}
+      {/* 🔹 Barra dei giocatori */}
       <PlayerList players={players} setPlayers={setPlayers} />
     </div>
   );
