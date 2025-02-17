@@ -1,48 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import QuizGrid from "./QuizGrid";
 import PlayerList from "./PlayerList";
-import "./styles/App.css";
 import SetupGame from "./SetupGame";
+import "./styles/App.css";
 
 function App() {
   // 📌 Stato globale dell'applicazione
-  const [players, setPlayers] = useState([]); // Lista dei giocatori
-  const [showPopup, setShowPopup] = useState(true); // Stato del popup iniziale
+  const [players, setPlayers] = useState([]); // Giocatori
+  const [showPopup, setShowPopup] = useState(true); // Mostrare/nascondere popup iniziale
   const [numPlayers, setNumPlayers] = useState(2); // Numero di giocatori selezionato
   const [selectedCategories, setSelectedCategories] = useState([]); // Categorie selezionate
 
   /**
    * 📌 Funzione per iniziare il gioco
-   * - Verifica che siano state selezionate almeno 5 categorie
-   * - Sceglie casualmente 5 categorie tra quelle selezionate
-   * - Genera automaticamente i giocatori
+   * - Seleziona 5 categorie casuali tra quelle scelte
+   * - Crea i giocatori automaticamente
    * - Nasconde il popup
    */
   const startGame = () => {
     if (selectedCategories.length >= 5) {
-      // 🔹 Mischia l'array delle categorie e ne prende 5 casualmente
-      const shuffledCategories = [...selectedCategories].sort(() => Math.random() - 0.5);
-      const selected = shuffledCategories.slice(0, 5);
+      setPlayers(
+        Array.from({ length: numPlayers }, (_, index) => ({
+          id: index + 1,
+          name: `Giocatore ${index + 1}`,
+          score: 0,
+        }))
+      );
 
-      // 🔹 Imposta i giocatori con punteggio iniziale 0
-      const initialPlayers = Array.from({ length: numPlayers }, (_, index) => ({
-        id: index + 1,
-        name: `Giocatore ${index + 1}`,
-        score: 0,
-      }));
+      // 🔹 Mischia e seleziona 5 categorie casuali
+      setSelectedCategories((prevCategories) => {
+        const shuffled = [...prevCategories].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, 5);
+      });
 
-      setPlayers(initialPlayers);
-      setSelectedCategories(selected); // 🔹 Ora aggiorna lo stato correttamente
-      setShowPopup(false); // 🔹 Chiude il popup iniziale
+      setShowPopup(false); // Chiude il popup
     }
   };
+
+  // 📌 Ottimizzazione: Memoizza le categorie per evitare re-render inutili
+  const memoizedCategories = useMemo(() => selectedCategories, [selectedCategories]);
 
   return (
     <div className="app-container">
       {/* 🔹 Sfocatura dello sfondo quando il popup è attivo */}
       {showPopup && <div className="overlay"></div>}
 
-      {/* 🔹 Popup iniziale per selezionare giocatori e categorie */}
+      {/* 🔹 Popup iniziale */}
       {showPopup && (
         <SetupGame
           setPlayers={setPlayers}
@@ -57,7 +60,7 @@ function App() {
 
       {/* 🔹 Griglia del quiz */}
       <div className="board-wrapper">
-        <QuizGrid selectedCategories={selectedCategories} />
+        <QuizGrid selectedCategories={memoizedCategories} />
       </div>
 
       {/* 🔹 Barra dei giocatori */}
