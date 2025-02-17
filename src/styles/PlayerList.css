@@ -3,30 +3,51 @@
 }
 
 .players-section {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: var(--players-bar-height);
+  width: 98vw; /* 🔹 Riduce leggermente la larghezza per evitare overflow */
+  max-width: 98vw;
   display: flex;
   justify-content: center;
-  align-items: center; /* 🔹 Centra verticalmente i box giocatori */
-  margin-top: auto;
-  padding-bottom: 15px; /* 🔹 Distanza dal bordo inferiore */
-  min-height: 120px;
-  background: rgba(0, 0, 0, 0.2); /* 🔹 Sfondo semi-trasparente per distinguere la barra */
+  align-items: center;
+  padding: 10px;
+  background: rgba(30, 58, 138, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px 20px 0 0; /* 🔹 Arrotonda entrambi i lati */
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* 🔹 Centra la barra esattamente nello schermo */
+  overflow: hidden; /* 🔹 Evita che il contenuto sbordi */
+}
+
+
+/* Luminosità effetto bordo */
+.players-section::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  opacity: 0.7;
 }
   
 /* 🔹 Contenitore dei giocatori */
 .players-container {
   display: flex;
-  gap: 15px;
   flex-wrap: wrap;
+  gap: 15px;
   justify-content: center;
-  align-items: center;
+  max-width: 95vw; /* 🔹 Impedisce lo sforamento */
+  overflow-x: hidden; /* 🔹 Blocca qualsiasi scroll laterale */
+  padding: 10px;
 }
 
-/* 🔹 Stile del box giocatore */
+/* 🔹 Stile aggiornato dei box giocatori */
 .player-box {
   background: linear-gradient(to bottom, #1E3A8A, #2563EB);
   color: white;
@@ -41,12 +62,15 @@
   min-width: 120px;
   max-width: 250px;
   flex-grow: 1;
-  position: relative; /* 🔹 Permette di gestire la posizione dei pulsanti */
+  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Bordo trasparente leggero */
 }
 
 /* 🔹 Effetto hover */
 .player-box:hover {
   transform: scale(1.05);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6), 
+              inset 0px -4px 12px rgba(255, 255, 255, 0.2);
 }
 
 /* 🔹 Stile del nome giocatore */
@@ -209,19 +233,25 @@
 
 /* Effetto rimbalzo della corona */
 @keyframes crownBounce {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-5px); }
 }
 
-/* Punteggio del leader più grande e dorato */
+/* 🔹 Punteggio del leader più grande e dorato */
 .leader .player-score {
-  font-size: 2rem; /* Punteggio più grande */
+  font-size: 2rem;
   font-weight: bold;
   color: gold;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.9); /* Effetto glow */
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
   transition: all 0.3s ease-in-out;
+}
+
+.board-wrapper {
+  width: 100%;
+  height: calc(100vh - var(--players-bar-height)); /* 🔹 Impedisce la sovrapposizione */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* 🔹 Evita scroll indesiderati */
 }
