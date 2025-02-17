@@ -1,53 +1,45 @@
-.board-wrapper {
-  width: 99vw;
-  height: calc(100vh - var(--players-bar-height) - 5vh); /* Altezza dinamica basata sulla barra */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Impostiamo la griglia con celle proporzionali */
-.board {
+.quiz-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 0.5fr repeat(5, 1fr);
+  grid-template-rows: auto repeat(5, 1fr);
   gap: 5px;
-  width: 100%;
-  height: 100%;
+  width: 100vw; /* 🔹 Assicura che non superi la viewport */
+  height: calc(100vh - var(--players-bar-height) - 2vh);
+  padding-bottom: 10px;
+  overflow: hidden; /* 🔹 Evita lo scroll indesiderato */
 }
-  
-.header {
+
+/* 🔹 Intestazione delle categorie */
+.category-header {
   background-color: #1E3A8A;
   padding: 10px;
-  font-size: 1.5vw;
+  font-size: 1.2rem;
   font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
+  text-align: center;
   color: white;
+  border-radius: 5px;
 }
 
-/* Celle responsive */
-.cell {
+/* 🔹 Celle della griglia */
+.grid-cell {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2563EB;
+  background: linear-gradient(to top, #1E3A8A, #2563EB); /* 🔹 Effetto sfumatura 3D */
   padding: 2vw;
   font-size: 1.5vw;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  border-radius: 5px;
+  font-weight: bold;
   color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px; /* 🔹 Angoli più morbidi */
+  box-shadow: 0px 2px 0px #0f2557, 0px 8px 10px rgba(0, 0, 0, 0.6); /* 🔹 Ombra 3D */
+  text-transform: uppercase;
 }
 
-/* Cambia colore al passaggio del mouse */
-.cell:hover {
-  background-color: #1E40AF;
-  transform: scale(1.05);
+/* 🔹 Effetto hover: sollevamento della cella */
+.grid-cell:hover {
+  transform: translateY(-5px); /* 🔹 Leggero sollevamento */
+  background: linear-gradient(to bottom, #2563EB, #1E40AF); /* 🔹 Cambia illuminazione */
+  box-shadow: 0px 6px 0px #0d1d47, 0px 10px 15px rgba(0, 0, 0, 0.7);
 }
