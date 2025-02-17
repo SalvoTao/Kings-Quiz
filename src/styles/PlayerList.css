@@ -1,62 +1,97 @@
 :root {
-  --players-bar-height: 18vh; /* Altezza dinamica della barra giocatori */
+  --players-bar-height: 15vh; /* 🔹 Altezza della barra giocatori */
 }
 
 .players-section {
+  width: 100%;
   position: absolute;
   bottom: 0;
-  width: 100vw;
+  left: 0;
   height: var(--players-bar-height);
-  background-color: #1E3A8A;
-  text-align: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5vw; /* Spazio tra i giocatori */
+  justify-content: center;
+  align-items: center; /* 🔹 Centra verticalmente i box giocatori */
+  margin-top: auto;
+  padding-bottom: 15px; /* 🔹 Distanza dal bordo inferiore */
+  min-height: 120px;
+  background: rgba(0, 0, 0, 0.2); /* 🔹 Sfondo semi-trasparente per distinguere la barra */
 }
   
+/* 🔹 Contenitore dei giocatori */
 .players-container {
   display: flex;
+  gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5vw;
-  margin-bottom: 15px;
+  align-items: center;
 }
 
+/* 🔹 Stile del box giocatore */
 .player-box {
-  position: relative;
-  background: linear-gradient(135deg, #2563EB, #1E40AF);
-  padding: 10px 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #1E3A8A, #2563EB);
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease-in-out;
   min-width: 120px;
-  max-width: 100%;
-  color: white;
-  font-weight: bold;
+  max-width: 250px;
+  flex-grow: 1;
+  position: relative; /* 🔹 Permette di gestire la posizione dei pulsanti */
 }
 
+/* 🔹 Effetto hover */
 .player-box:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Quando il nome si allunga, il box si adatta */
-.player-box:has(.player-name-input:focus) {
-  min-width: 150px;
-  max-width: 250px;
-}
-
+/* 🔹 Stile del nome giocatore */
 .player-name {
-  font-size: 18px;
-  margin-bottom: 5px;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 8px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  transition: border-color 0.3s ease;
 }
 
+.player-name:focus {
+  border-color: white;
+  outline: none;
+}
+
+/* 🔹 Punteggio del giocatore */
 .player-score {
-  font-size: 16px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* 🔹 Stile pulsanti + e - */
+.score-btn {
+  background: gold;
+  border: none;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+  box-shadow: 0px 2px 5px rgba(255, 215, 0, 0.6);
+}
+
+.score-btn:hover {
+  background: #ffcc00;
+  transform: scale(1.1);
 }
 
 .add-player-btn {
@@ -103,20 +138,21 @@
   background: darkred;
 }
 
-/* Input del nome del giocatore */
+/* 🔹 Input del nome con larghezza adattiva */
 .player-name-input {
-  font-size: 14px;
-  font-weight: bold;
   text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
   background: white;
   border: 2px solid #1E3A8A;
   border-radius: 5px;
   padding: 5px;
-  min-width: 100px;
   width: auto;
+  min-width: 100px;
   max-width: 100%;
-  overflow: hidden;
   transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* Permette all'input di espandersi in base al testo inserito */
@@ -125,13 +161,11 @@
   min-width: 120px;
 }
 
-/* Stile per il contenitore dei punti e pulsanti */
+/* 🔹 Sezione punteggio */
 .score-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
-  margin-top: 5px;
 }
 
 /* Stile dei pulsanti */
@@ -150,13 +184,10 @@
   background-color: #2563EB;
 }
 
-/* Stile speciale per il giocatore in vantaggio (se non c'è pareggio) */
-.leader {
+/* 🔹 Evidenziazione del leader */
+.player-box.leader {
   border: 3px solid gold;
-  box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
-  transform: scale(1.1); /* Ingrandisce leggermente il leader */
-  transition: all 0.3s ease-in-out;
-  animation: glow 1.5s infinite alternate;
+  box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
 }
 
 @keyframes glow {
@@ -171,8 +202,8 @@
 .leader::before {
   content: "👑";
   position: absolute;
-  top: -25px;
-  font-size: 30px;
+  top: -40px;
+  font-size: 2.5rem; /* 🔹 Aumentata la dimensione */
   animation: crownBounce 1s infinite alternate;
 }
 
