@@ -18,20 +18,23 @@ const QuizGrid = ({ selectedCategories = [] }) => {
     <div className="quiz-grid">
       {/* 🔹 Intestazione con le categorie */}
       {categories.map((category, index) => (
-        <div key={index} className="category-header">
+        <div key={index} className="header">
           {category}
         </div>
-      ))}
+      ))
+      }
 
       {/* 🔹 Griglia con le celle dei punteggi */}
-      {points.map((point) =>
-        categories.map((category, colIndex) => (
-          <div key={`${colIndex}-${point}`} className="grid-cell">
-            {point}
-          </div>
-        ))
-      )}
-    </div>
+      {
+        points.map((point) =>
+          categories.map((category, colIndex) => (
+            <div key={`${colIndex}-${point}`} className="grid-cell">
+              {point}
+            </div>
+          ))
+        )
+      }
+    </div >
   );
 };
 
