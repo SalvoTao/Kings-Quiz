@@ -48,7 +48,7 @@ const SetupGame = ({
                 <div className="popup">
                     <img src="/images/kings-quiz-logo.png" alt="Kings Quiz Logo" className="popup-logo" />
 
-                    <h2>Seleziona il numero di giocatori</h2>
+                    <h2>Seleziona il numero di giocatori:</h2>
                     <div className="player-selection">
                         <button
                             className={`num-btn ${numPlayers === 2 ? "disabled" : ""}`}
@@ -93,7 +93,7 @@ const SetupGame = ({
                         className={`start-game-btn ${selectedCategories.length < 5 ? "disabled" : "enabled"}`}
                         onClick={handleStartGame}
                         disabled={selectedCategories.length < 5}
-                        style={{ marginBottom: "20px" }} // Aggiunge spazio sotto il pulsante
+                        style={{ marginTop: "20px" }} // Aggiunge spazio sopra il pulsante
                     >
                         INIZIA IL GIOCO
                     </button>

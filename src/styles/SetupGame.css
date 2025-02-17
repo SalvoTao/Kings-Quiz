@@ -1,153 +1,63 @@
-.game-version {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-/* Sfocatura dello sfondo quando il popup è attivo */
-.blurred {
-  filter: blur(5px);
-  pointer-events: none; /* Disabilita le interazioni con lo sfondo */
-  transition: filter 0.3s ease-in-out;
-}
-
-/* Overlay scuro per il popup */
-.popup-overlay {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10; /* Sopra l'overlay */
-}
-
-/* Sfocatura dello sfondo quando il popup è attivo */
+/* 🔹 Sfocatura dello sfondo quando il popup è attivo */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* Sfondo scuro trasparente */
-  backdrop-filter: blur(8px); /* Sfocatura SOLO sullo sfondo */
-  z-index: 5;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 10;
 }
 
-/* Stile del popup con effetto vetro */
-.popup {
-  position: relative;
-  z-index: 20;
-  background: rgba(30, 58, 138, 0.9); /* Blu con trasparenza */
-  padding: 25px;
+/* 🔹 Contenitore principale del popup */
+.popup-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(30, 58, 138, 0.9);
+  padding: 30px;
+  padding-bottom: 1px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0px 4px 15px rgba(255, 215, 0, 0.5); /* Glow dorato */
+  box-shadow: 0px 4px 15px rgba(255, 215, 0, 0.5);
   color: white;
   font-family: 'Poppins', sans-serif;
-  border: 2px solid rgba(255, 215, 0, 0.5); /* Bordo dorato leggero */
-  animation: fadeIn 0.5s ease-in-out;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  animation: fadeIn 0.4s ease-in-out;
+  z-index: 20;
 }
 
-/* Titolo del popup */
+/* 🔹 Logo del popup */
+.popup-logo {
+  width: 220px;
+  position: absolute;
+  top: -135px;
+  left: 50%; /* 🔹 Centra il logo */
+  transform: translateX(-50%); /* 🔹 Previene lo spostamento a destra */
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+  animation: bounceLogo 1.5s infinite alternate;
+}
+
+/* 🔹 Titoli del popup */
 .popup h2 {
   margin-bottom: 15px;
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-/* Input per il numero di giocatori */
-.popup input {
-  width: 60px;
-  font-size: 1.5rem;
-  text-align: center;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  font-size: 1.8rem;
   font-weight: bold;
-  transition: all 0.3s;
-  border: 2px solid rgba(255, 215, 0, 0.5);
-  display: block;
-  margin: 0 auto; /* Più spazio sotto */
 }
 
-/* Effetto quando l'input è selezionato */
-.popup input:focus {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: gold;
-}
-
-/* Stile del bottone di avvio */
-.start-game-btn {
-  background: gray;
-  color: black;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 12px 20px;
-  margin-top: 15px;
-  border: 2px solid darkgray;
-  cursor: not-allowed;
-  transition: all 0.3s ease-in-out;
-  box-shadow: none;
-}
-
-/* Effetto hover sul pulsante */
-.start-game-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 0px #995f00, 0px 8px 15px rgba(0, 0, 0, 0.6);
-}
-
-/* Quando attivo (almeno 5 categorie selezionate) */
-.start-game-btn.enabled {
-  background: #4CAF50; /* Verde uguale all’avviso */
-  color: white;
-  cursor: pointer;
-  border: 2px solid darkgreen;
-  box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.5);
-  transition: all 0.3s ease-in-out;
-}
-
-.start-game-btn.enabled:hover {
-  background: #45a049;
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 12px rgba(0, 128, 0, 0.6);
-}
-
-/* Pulsante disabilitato */
-.start-game-btn.disabled {
-  background: gray !important;
-  cursor: not-allowed;
-  box-shadow: none;
-  opacity: 0.5;
-}
-
-/* Animazione di comparsa */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-/* Contenitore del selettore giocatori */
+/* 🔹 Sezione selezione giocatori */
 .player-selection {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px; /* Distanza tra i pulsanti e il numero */
-  margin-bottom: 25px; /* Spazio sotto */
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-/* Stile del numero visualizzato */
+/* 🔹 Numero giocatori visualizzato */
 .num-display {
   font-size: 2rem;
   font-weight: bold;
@@ -160,7 +70,7 @@
   text-align: center;
 }
 
-/* Stile dei pulsanti + e - */
+/* 🔹 Pulsanti + e - */
 .num-btn {
   background: gold;
   color: black;
@@ -174,13 +84,12 @@
   box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.7);
 }
 
-/* Effetto hover */
 .num-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0px 6px 0px #995f00, 0px 8px 15px rgba(0, 0, 0, 0.6);
+  background: #ffcc00;
 }
 
-/* Pulsante disabilitato */
+/* 🔹 Pulsante disabilitato */
 .num-btn.disabled {
   background: gray !important;
   cursor: not-allowed;
@@ -188,127 +97,49 @@
   opacity: 0.5;
 }
 
-/* Effetto 3D per il logo */
-.popup-logo {
-  width: 250px; /* Regola la dimensione */
-  position: absolute;
-  top: -160px; /* Posizionamento sopra il popup */
-  left: 50%;
-  transform: translateX(-50%) perspective(500px) rotateX(15deg); /* Inclinazione 3D */
-  
-  /* Ombra per dare profondità */
-  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
-  
-  /* Effetto leggero di rimbalzo per un look più dinamico */
-  animation: bounceEffect 2s infinite ease-in-out;
-}
-
-@keyframes bounceEffect {
-  0%, 100% {
-    transform: translateX(-50%) perspective(500px) rotateX(15deg) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) perspective(500px) rotateX(15deg) translateY(-3px);
-  }
-}
-
-/* Stile aggiornato per i pulsanti del popup */
-.popup button {
-  background: linear-gradient(to bottom, #FFD700, #FFA500); /* Stesso giallo dorato del logo */
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease-in-out;
-  
-  /* Effetto 3D */
-  box-shadow: 0px 4px 0px #cc8400, 0px 6px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Effetto al passaggio del mouse */
-.popup button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 0px #995f00, 0px 8px 15px rgba(0, 0, 0, 0.6);
-}
-
-/* Effetto click */
-.popup button:active {
-  transform: translateY(2px);
-  box-shadow: 0px 2px 0px #5a3d00, 0px 4px 8px rgba(0, 0, 0, 0.5);
-}
-/* Contenitore delle categorie */
+/* 🔹 Sezione selezione categorie */
 .category-selection {
-  margin-top: 20px;
   text-align: center;
+  margin-top: 20px;
 }
 
-/* Titolo categorie */
-.category-selection h3 {
-  font-size: 1.2rem;
-  color: white;
-  margin-bottom: 10px;
-}
-
-/* Lista delle categorie */
+/* 🔹 Lista delle categorie */
 .category-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px; /* Ridotto lo spazio tra i box */
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
-/* Singola categoria */
+/* 🔹 Singola categoria */
 .category-option {
-  background: linear-gradient(to bottom, #1E3A8A, #2563EB); /* Effetto sfumatura */
+  background: linear-gradient(to bottom, #1E3A8A, #2563EB);
   color: white;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: 7px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-size: 1rem;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ombra per rilievo */
-  border: 2px solid transparent; /* Bordo trasparente per effetto hover */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
 }
 
-/* Effetto al passaggio del mouse */
 .category-option:hover {
   background: linear-gradient(to bottom, #2563EB, #1E40AF);
-  transform: scale(1.05); /* Leggero ingrandimento */
-  border: 2px solid gold; /* Evidenziazione */
+  border: 2px solid gold;
 }
 
-/* Effetto categoria selezionata */
-.category-option input:checked + label {
-  background: linear-gradient(to bottom, #FFD700, #FFA500); /* Effetto dorato */
-  color: black;
-  border: 2px solid white;
-  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.6);
-}
-
-/* Nascondiamo la checkbox */
-.category-option input {
-  display: none;
-}
-
-/* Categoria selezionata - Effetto attivo */
+/* 🔹 Categoria selezionata */
 .category-option.selected {
-  background: linear-gradient(to bottom, #FFD700, #FFA500); /* Oro */
+  background: linear-gradient(to bottom, #FFD700, #FFA500);
   color: black;
   border: 2px solid white;
   box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.6);
-  transform: scale(1.05);
 }
 
-/* Messaggio di avviso iniziale (sfondo rosso) */
+/* 🔹 Messaggio di avviso categorie */
 .category-warning {
   font-size: 0.9rem;
   text-align: center;
@@ -317,16 +148,63 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* Quando ci sono meno di 5 categorie (sfondo rosso) */
 .category-warning.red {
-  background: #ff4d4d; /* Rosso acceso */
+  background: #ff4d4d;
   color: white;
   border: 1px solid darkred;
 }
 
-/* Quando ci sono almeno 5 categorie (sfondo verde) */
 .category-warning.green {
-  background: #4CAF50; /* Verde acceso */
+  background: #4CAF50;
   color: white;
   border: 1px solid darkgreen;
+}
+
+/* 🔹 Pulsante INIZIA IL GIOCO */
+.start-game-btn {
+  background: linear-gradient(to bottom, #2E7D32, #4CAF50); /* 🔹 Verde con sfumatura */
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.3);
+  border: 2px solid transparent;
+}
+
+.start-game-btn:hover {
+  background: linear-gradient(to bottom, #388E3C, #2E7D32); /* 🔹 Effetto hover */
+  border: 2px solid gold;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.6);
+}
+
+/* 🔹 Quando è disabilitato */
+.start-game-btn.disabled {
+  background: gray !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+/* 🔹 Versione del gioco */
+.game-version {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.4); /* 🔹 Maggiore trasparenza */
+  text-shadow: none; /* 🔹 Rimuove eventuali effetti di ombra */
+}
+
+/* 🔹 Animazione di comparsa */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Effetto rimbalzo della corona */
+@keyframes bounceLogo {
+  0% { transform: translateX(-50%) translateY(0px); }
+  100% { transform: translateX(-50%) translateY(-5px); }
 }

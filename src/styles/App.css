@@ -8,9 +8,14 @@ body {
   padding: 0;
   background-color: #121212;
   color: white;
+  overflow-x: hidden; /* 🔹 Previene eventuali scroll orizzontali indesiderati */
 }
 
 /* Se vuoi usare Montserrat invece di Poppins, cambia qui */
 .app-container {
   font-family: "Montserrat", sans-serif;
+  min-height: 100vh; /* 🔹 Assicura che il contenuto si estenda su tutta la schermata */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
